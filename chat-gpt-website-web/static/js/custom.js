@@ -427,10 +427,10 @@ $(document).ready(function() {
     });
   }
 
-  // 禁用右键菜单
-  document.addEventListener('contextmenu',function(e){
-    e.preventDefault();  // 阻止默认事件
-  });
+  // // 禁用右键菜单
+  // document.addEventListener('contextmenu',function(e){
+  //   e.preventDefault();  // 阻止默认事件
+  // });
 
   // 禁止键盘F12键
   document.addEventListener('keydown',function(e){

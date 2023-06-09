@@ -374,3 +374,13 @@ input[type="checkbox"]:checked + .check-trail .check-handler::before {
   color:#1ab394;
   text-decoration:none;
 }
+.sidebar {
+  width: 20%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.whiteboard {
+  width: 80%;
+  padding: 20px;
+}
