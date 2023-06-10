@@ -97,14 +97,15 @@
                 <textarea id="chatInput" class="form-control" rows="1"></textarea>
               </div>
               <button id="chatBtn" class="btn btn-primary" type="button">Go !</button>
+              <button id="voiceButton" class="btn btn-primary" type="button">语音输入</button>
             </div>
           </div>
         </div>
         <footer class="foot" style="margin-top: 20px;">
-          <p class="lead text-center">“ChatGPT 一个新时代的启幕”</p>
+          <p class="lead text-center">“ChatGPT”</p>
           <p class="lead text-center">
-            <a href="https://blog.csdn.net/" target="_blank"><i class="fa fa-link fa-lg" aria-hidden="true"></i>&nbsp; 联系我</a>
-            <a href="https://gitee.com/aniu-666/chat-gpt-website" target="_blank"><i class="fa fa-github fa-lg" aria-hidden="true"></i>&nbsp; 文档</a>
+            <a href="/" target="_blank"><i class="fa fa-link fa-lg" aria-hidden="true"></i>&nbsp; 联系我</a>
+            <a href="/" target="_blank"><i class="fa fa-github fa-lg" aria-hidden="true"></i>&nbsp; 文档</a>
           </p>
         </footer>
       </div>
@@ -118,4 +119,49 @@
 <script src="./static/js/html2canvas.min.js"></script>
 <script src="./static/js/config.js"></script>
 <script src="./static/js/custom.js"></script>
+<script>
+  var chatInput = document.getElementById('chatInput');
+  var chatBtn = document.getElementById('chatBtn');
+  var voiceButton = document.getElementById('voiceButton');
+  var recognition;
+
+  // 检查浏览器是否支持Web Speech API
+  if ('webkitSpeechRecognition' in window) {
+    recognition = new webkitSpeechRecognition();
+
+    // 设置语言为英语
+    recognition.lang = 'en-US';
+
+    // 在识别到语音时触发此事件
+    recognition.onresult = function(event) {
+      var result = event.results[0][0].transcript;
+      chatInput.value += result;
+    };
+
+    // 点击按钮开始语音识别
+    voiceButton.addEventListener('click', function() {
+      recognition.start();
+    });
+  } else {
+    console.log('浏览器不支持语音识别功能');
+  }
+
+  // 点击发送按钮的事件处理程序
+  chatBtn.addEventListener('click', function() {
+    var message = chatInput.value;
+    sendMessage(message);
+    chatInput.value = ''; // 清空输入框
+  });
+
+  function sendMessage(message) {
+    // 将用户输入的消息展示在页面上
+    var chatDisplay = document.getElementById('chatDisplay');
+    var messageElement = document.createElement('div');
+    messageElement.textContent = message;
+    chatDisplay.appendChild(messageElement);
+
+    // 在这里可以执行其他的操作，例如将消息发送到服务器
+    // ...
+  }
+</script>
 </html>
